@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 {% block html_attribs %} ng-app="BeerListerApp"{% endblock %}
-{% block body_attribs %} ng-controller="BeerListerController"{% endblock %}
+{% block body_attribs %} ng-controller="BeerListerMainController"{% endblock %}
 {%block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
   <script src="{{ url_for('static', filename='main.js') }}"></script>
@@ -11,12 +11,25 @@
     <div class='row'>
       <div class='col'>
         <h1>Main</h1>
-        <form role="form" ng-submit="getResults()" class='form'>
-        <div class='form-group input-group'>
-        <input type="text" ng-model="input_url" name="url" class="form-control" id="url-box" placeholder="Enter URL..." style="max-width: 300px;">
-        <input type='submit' class="form-control"></input>
+        <div ng-controller="BeerForm">
+          <form role="form" ng-submit="saveBeer()" class='form'>
+          <div class='form-group input-group'>
+            <label>Name</label>
+            <input type="text" ng-model="name" class="form-control" placeholder="Enter Name...">
+          </div>
+          <div class='form-group input-group'>
+            <label>ABV</label>
+            <input type="number" step='.01' ng-model="abv" class="form-control" placeholder="Enter ABV...">
+          </div>
+          <div class='form-group input-group'>
+            <label>Rating</label>
+            <input type="number" ng-model="rating" class="form-control" placeholder="Enter Rating...">
+          </div>
+          <div class='form-group input-group control-group'>
+            <input type='submit' class="form-control"></input>
+          </div>
+          </form>
         </div>
-        </form>
       </div>
     </div>
   </div>
